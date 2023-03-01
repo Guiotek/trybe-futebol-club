@@ -1,5 +1,6 @@
 import * as express from 'express';
 import teamsRouter from './api/Router/Teams.router';
+import loginRouter from './api/Router/Login.router';
 
 class App {
   public app: express.Express;
@@ -12,6 +13,7 @@ class App {
     // Não remover essa rota
     this.app.get('/', (req, res) => res.json({ ok: true }));
     this.app.use(teamsRouter);
+    this.app.use(loginRouter);
   }
 
   private config():void {
