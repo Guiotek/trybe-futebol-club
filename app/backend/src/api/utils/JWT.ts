@@ -5,4 +5,6 @@ const secret = process.env.JWT_SECRET as string;
 
 export const sign = (payload: AuthBody) => jwt.sign(payload, secret);
 
-export const verify = () => {};
+export const verify = (token: string) => {
+  jwt.verify(token, secret);
+};

@@ -1,6 +1,8 @@
 import * as express from 'express';
+import 'express-async-errors';
 import teamsRouter from './api/Router/Teams.router';
 import loginRouter from './api/Router/Login.router';
+import errorMiddleware from './api/Middleware/ErrorMiddleware';
 
 class App {
   public app: express.Express;
@@ -14,6 +16,7 @@ class App {
     this.app.get('/', (req, res) => res.json({ ok: true }));
     this.app.use(teamsRouter);
     this.app.use(loginRouter);
+    this.app.use(errorMiddleware);
   }
 
   private config():void {
