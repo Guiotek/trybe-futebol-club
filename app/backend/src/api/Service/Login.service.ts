@@ -20,7 +20,7 @@ export default class LoginService {
     }
 
     if (password.length < 6) {
-      throw new Error('Invalid email or password');
+      throw new Error(this.invalid);
     }
   };
 
