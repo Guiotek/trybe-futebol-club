@@ -30,8 +30,8 @@ export default class LoginService {
     if (!userPassword) {
       throw new Unauthorized(this.invalid);
     }
-    const password = await bcrypt.compare(bodyPassword, userPassword.password);
-    if (!password) {
+    const passwordValid = await bcrypt.compare(bodyPassword, userPassword.password);
+    if (!passwordValid) {
       throw new Unauthorized(this.invalid);
     }
   };
