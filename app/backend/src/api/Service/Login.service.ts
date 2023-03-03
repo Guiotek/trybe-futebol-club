@@ -46,7 +46,11 @@ export default class LoginService {
       where: { email: body.email },
     });
     await this.verifyPassword(user, body.password);
-    const token = sign(body);
+    const token = sign({
+      username: user?.username,
+      email: user?.email,
+      role: user?.role,
+    });
     return token;
   };
 }
