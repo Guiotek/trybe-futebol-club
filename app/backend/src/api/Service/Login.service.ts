@@ -8,7 +8,10 @@ import { sign } from '../utils/JWT';
 export default class LoginService {
   public invalid = 'Invalid email or password';
   public verifyBody = async (body: AuthBody) => {
-    if (!body.email || !body.password) {
+    if (!body.email) {
+      throw new BadRequest('All fields must be filled');
+    }
+    if (!body.password) {
       throw new BadRequest('All fields must be filled');
     }
   };
