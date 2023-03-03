@@ -1,6 +1,7 @@
 import { Request } from 'express';
 import Teams from '../../database/models/Teams';
 import Matches from '../../database/models/Matches';
+import NotId from '../Errors/NotId';
 
 export default class MatchesService {
   public getAll = async () => {
@@ -32,7 +33,14 @@ export default class MatchesService {
   };
 
   public finish = async (id: number) => {
-    await Matches.destroy(
+    const match = await Matches.findOne(
+      { where: { id } },
+    );
+    if (!match) {
+      throw new NotId('id not found');
+    }
+    await Matches.update(
+      { inProgress: false },
       { where: { id } },
     );
   };

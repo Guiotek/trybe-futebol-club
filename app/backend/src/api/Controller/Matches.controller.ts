@@ -1,5 +1,6 @@
-import { Request, Response } from 'express';
+import { NextFunction, Request, Response } from 'express';
 import MatchesService from '../Service/Matches.service';
+import ErrorMiddleware from '../Middleware/ErrorMiddleware';
 
 export default class MatchesController {
   private service: MatchesService;
@@ -17,10 +18,14 @@ export default class MatchesController {
     return res.status(200).json(allTeams);
   }
 
-  public async finish(req:Request, res: Response): Promise<Response> {
-    const { id } = req.params;
-    const idN = Number(id);
-    await this.service.finish(idN);
-    return res.status(200).json({ message: 'Finished' });
+  public async finish(req:Request, res: Response, next: NextFunction) {
+    try {
+      const { id } = req.params;
+      const idN = Number(id);
+      await this.service.finish(idN);
+      return res.status(200).json({ message: 'Finished' });
+    } catch (error) {
+      ErrorMiddleware(error, req, res, next);
+    }
   }
 }
