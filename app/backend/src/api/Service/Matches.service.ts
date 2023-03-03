@@ -30,4 +30,10 @@ export default class MatchesService {
       return result;
     }
   };
+
+  public finish = async (id: number) => {
+    await Matches.destroy(
+      { where: { id } },
+    );
+  };
 }

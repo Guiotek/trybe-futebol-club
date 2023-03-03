@@ -16,4 +16,11 @@ export default class MatchesController {
     const allTeams = await this.service.getAll();
     return res.status(200).json(allTeams);
   }
+
+  public async finish(req:Request, res: Response): Promise<Response> {
+    const { id } = req.params;
+    const idN = Number(id);
+    await this.service.finish(idN);
+    return res.status(200).json({ message: 'Finished' });
+  }
 }
