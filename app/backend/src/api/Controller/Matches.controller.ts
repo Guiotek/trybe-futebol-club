@@ -27,7 +27,7 @@ export default class MatchesController {
 
   public async create(req:Request, res: Response): Promise<Response> {
     const result = await this.service.create(req);
-    return res.status(200).json(result);
+    return res.status(201).json(result);
   }
 
   public async finish(req:Request, res: Response, next: NextFunction) {
