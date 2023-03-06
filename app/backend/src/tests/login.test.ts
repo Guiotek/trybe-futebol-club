@@ -31,11 +31,10 @@ const user = {
 describe('Post /login', () => {
   beforeEach(() => sinon.restore());
   it('response status 200 and correct body', async () => {
+     sinon.stub(Users, 'findOne').resolves(user as Users);
      sinon.stub(bcrypt, 'compareSync').resolves(true);
  
      const response = await chai.request(app).post('/login').send( Login );
-     console.log(response);
-     
  
      expect(response.status).to.equal(200);
   });

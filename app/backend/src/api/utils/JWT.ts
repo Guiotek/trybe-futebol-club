@@ -1,7 +1,7 @@
 import * as jwt from 'jsonwebtoken';
 import AuthSign from '../interfaces/AuthSign';
 
-const secret = process.env.JWT_SECRET as string;
+const secret = process.env.JWT_SECRET as string || 'jwt_secret';
 
 export const sign = (payload: AuthSign) => jwt.sign(payload, secret);
 
