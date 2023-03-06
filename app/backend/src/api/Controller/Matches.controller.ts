@@ -24,6 +24,7 @@ export default class MatchesController {
       const idN = Number(id);
       await this.service.finish(idN);
       return res.status(200).json({ message: 'Finished' });
+      // ;
     } catch (error) {
       ErrorMiddleware(error, req, res, next);
     }
