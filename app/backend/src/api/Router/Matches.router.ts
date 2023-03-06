@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import MatchesController from '../Controller/Matches.controller';
 import AuthToken from '../Middleware/AuthToken';
+import CreateMatcheMiddleware from '../Middleware/CreateMatchesMiddleware';
 
 const machesController = new MatchesController();
 
@@ -16,6 +17,12 @@ machesRouter.patch(
   '/matches/:id',
   (req, res, next) => AuthToken(req, res, next),
   (req, res) => machesController.update(req, res),
+);
+machesRouter.post(
+  '/matches',
+  (req, res, next) => AuthToken(req, res, next),
+  (req, res, next) => CreateMatcheMiddleware(req, res, next),
+  (req, res) => machesController.create(req, res),
 );
 
 export default machesRouter;

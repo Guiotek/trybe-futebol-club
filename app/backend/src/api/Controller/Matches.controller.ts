@@ -19,13 +19,15 @@ export default class MatchesController {
   }
 
   public async update(req:Request, res: Response): Promise<Response> {
-    // if (!req.body.homeTeamGoals || !req.body.awayTeamGoals) {
-    //   return res.status(401).json({ message: 'invalid body' });
-    // }
     const { id } = req.params;
     const ids = Number(id);
     await this.service.update(req, ids);
     return res.status(200).json({ message: 'updated' });
+  }
+
+  public async create(req:Request, res: Response): Promise<Response> {
+    const result = await this.service.create(req);
+    return res.status(200).json(result);
   }
 
   public async finish(req:Request, res: Response, next: NextFunction) {

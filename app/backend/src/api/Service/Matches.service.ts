@@ -19,6 +19,26 @@ export default class MatchesService {
     );
   };
 
+  public create = async (req: Request) => {
+    const { homeTeamId, awayTeamId, homeTeamGoals, awayTeamGoals } = req.body;
+    await Matches.create({
+      homeTeamId,
+      awayTeamId,
+      homeTeamGoals,
+      awayTeamGoals,
+    });
+
+    const result = await Matches.findOne({
+      where: {
+        homeTeamId,
+        awayTeamId,
+        homeTeamGoals,
+        awayTeamGoals,
+      },
+    });
+    return result?.dataValues;
+  };
+
   public filter = async (req: Request) => {
     const { inProgress } = req.query;
     if (inProgress === 'true') {
