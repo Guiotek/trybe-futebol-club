@@ -12,6 +12,13 @@ export default class MatchesService {
     return result;
   };
 
+  public update = async (req: Request, id: number) => {
+    await Matches.update(
+      req.body,
+      { where: { id } },
+    );
+  };
+
   public filter = async (req: Request) => {
     const { inProgress } = req.query;
     if (inProgress === 'true') {

@@ -12,5 +12,10 @@ machesRouter.patch(
   (req, res, next) => AuthToken(req, res, next),
   (req, res, next) => machesController.finish(req, res, next),
 );
+machesRouter.patch(
+  '/matches/:id',
+  (req, res, next) => AuthToken(req, res, next),
+  (req, res) => machesController.update(req, res),
+);
 
 export default machesRouter;

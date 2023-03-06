@@ -18,6 +18,16 @@ export default class MatchesController {
     return res.status(200).json(allTeams);
   }
 
+  public async update(req:Request, res: Response): Promise<Response> {
+    // if (!req.body.homeTeamGoals || !req.body.awayTeamGoals) {
+    //   return res.status(401).json({ message: 'invalid body' });
+    // }
+    const { id } = req.params;
+    const ids = Number(id);
+    await this.service.update(req, ids);
+    return res.status(200).json({ message: 'updated' });
+  }
+
   public async finish(req:Request, res: Response, next: NextFunction) {
     try {
       const { id } = req.params;
