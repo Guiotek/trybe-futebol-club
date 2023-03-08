@@ -10,6 +10,7 @@ export default class LeaderboardController {
 
   public async getAll(req:Request, res: Response): Promise<Response> {
     const allTeams = await this.service.getAll();
+    console.log(allTeams);
     return res.status(200).json(allTeams);
   }
 }
