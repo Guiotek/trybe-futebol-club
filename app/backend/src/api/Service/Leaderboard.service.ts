@@ -33,11 +33,11 @@ inner join matches as mt
 on mt.home_team_id = t.id
 and mt.in_progress = 0
 group by t.id
-order by totalVictories desc,
+order by totalPoints desc,
+totalVictories desc,
 goalsBalance desc,
 goalsFavor desc,
-goalsOwn desc
-`;
+goalsOwn asc`;
 
 export default class LeaderboardService {
   public getAll = async () => {
